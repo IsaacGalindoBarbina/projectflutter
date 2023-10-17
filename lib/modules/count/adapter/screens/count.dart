@@ -1,0 +1,50 @@
+import 'package:flutter/material.dart';
+import 'dart:math';
+class Count extends StatefulWidget{ //genera un estado a _CountState
+  const Count({super.key});
+
+  @override
+  State<Count> createState() => _CountState();
+}
+
+class _CountState extends State<Count> {
+  int number =1;
+  final random = Random();
+  //Color actualColor = Colors.blue;
+  int randomColor =0;
+  List<Color> colors = [Colors.blue, Colors.yellow, Colors.green, Colors.red, Colors.black];
+  void cambiarColor(){
+    //actualColor = colors[random.nextInt(colors.length)];
+    randomColor = (randomColor + 1) % colors.length;
+  }
+  @override
+  Widget build(BuildContext context) {
+    TextStyle fontTouch = TextStyle(fontSize: 32.0, color: colors[randomColor]);
+    
+    return Scaffold(
+      appBar: AppBar(title: const Text("Contador Isaac Suku"), backgroundColor: colors[randomColor],),
+      body:  Center( //centra bien
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center, //centra en vertical
+          crossAxisAlignment: CrossAxisAlignment.center, // centra en horizontal
+          children: [
+            Text('Número de touch', style: fontTouch),
+            Text('$number', style:fontTouch)
+          ]
+        ),
+      ),
+      //floatingActionButton: const Text("Plus"),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: FloatingActionButton(onPressed:(){
+        cambiarColor();
+        number++;
+        print('Hola, $number'); 
+        setState((){});}, 
+        child: const Icon(Icons.add),),
+    );
+  }
+}
+
+
+
+
